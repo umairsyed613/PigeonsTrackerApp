@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border" [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button color="primary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="tracking-in-contract">PigeonsTracker</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon name="language-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button>
+                <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+        <ion-fab-button color="primary">
+            <ion-icon name="share-social-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+            <ion-fab-button color="secondary">
+                <ion-icon name="logo-facebook"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="danger">
+                <ion-icon name="logo-youtube"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="success">
+                <ion-icon name="logo-google"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
+
+    <div class="quick-links ion-margin-start">
+        <ion-icon name="link-outline"></ion-icon>
+        <h5 class="ion-margin-start">Quick Links</h5>
+    </div>
+    <div class="category-slider ion-margin-top">
+        <ion-grid class="ion-no-margin">
+            <ion-row>
+                <ion-col class="tile-1 ion-activatable" [routerLink]="['/meal-planner']" routerDirection="forward" size="12" size-xs>
+                    <h6>Tournaments</h6>
+                    <ion-icon name="trophy-outline"></ion-icon>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </ion-col>
+                <ion-col class="tile-2 ion-activatable" [routerLink]="['/grocerylist']" routerDirection="forward" size="12" size-xs>
+                    <h6>Practice</h6>
+                    <ion-icon name="walk-outline"></ion-icon>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="tile-3 ion-activatable" [routerLink]="['/todo-planner']" routerDirection="forward" size="12" size-xs>
+                    <h6>Diseases & Cure</h6>
+                    <ion-icon name="bandage-outline"></ion-icon>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </ion-col>
+                <ion-col class="tile-4 ion-activatable" [routerLink]="['/quick-notes']" routerDirection="forward" size="12" size-xs>
+                    <h6>Information</h6>
+                    <ion-icon name="information-outline"></ion-icon>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+    <div class="quick-links ion-margin-start ion-margin-top">
+        <ion-icon name="globe-outline"></ion-icon>
+        <h5 class="ion-margin-start">Descover</h5>
+    </div>
+</ion-content>

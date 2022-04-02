@@ -1,0 +1,28 @@
+@media (min-width: 577px) {
+    ion-menu {
+        --side-max-width: 15%;
+    }
+}
+
+#menuList {
+    ion-list {
+        ion-item {
+            --ripple-color: var(--ion-color-primary);
+        }
+    }
+}
+
+.menu-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    img {
+        height: 100px;
+        width: 100px;
+        user-select: none;
+        box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+        border-radius: 25px;
+    }
+}
