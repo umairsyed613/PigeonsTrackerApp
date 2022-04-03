@@ -4,4 +4,6 @@
     <string name="title_activity_main">PigeonsTracker</string>
     <string name="package_name">com.pigeonstracker.app</string>
     <string name="custom_url_scheme">com.pigeonstracker.app</string>
+    <string name="admob_app_id">ca-app-pub-7960027902389813~7067278099</string>
+
 </resources>

@@ -1,0 +1,40 @@
+<ion-header class="ion-no-border" translucent="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" routerDirection="back" color="primary">
+            </ion-back-button>
+        </ion-buttons>
+        <ion-title>Tournaments</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="primary">
+                <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <div class="container">
+        <ion-item>
+            <ion-icon name="trophy-outline" slot="start"></ion-icon>
+            <ion-text>
+                <h6>From you</h6>
+            </ion-text>
+        </ion-item>
+        <div class="tournaments-list"></div>
+        <ion-item>
+            <ion-icon name="trophy-outline" slot="start"></ion-icon>
+            <ion-text>
+                <h6>From others</h6>
+            </ion-text>
+        </ion-item>
+        <div class="tournaments-list">
+        </div>
+    </div>
+</ion-content>

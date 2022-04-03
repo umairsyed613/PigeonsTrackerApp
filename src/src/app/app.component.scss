@@ -8,6 +8,9 @@
     ion-list {
         ion-item {
             --ripple-color: var(--ion-color-primary);
+            ion-icon {
+                margin-right: 0.8rem !important;
+            }
         }
     }
 }
