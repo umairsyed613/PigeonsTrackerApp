@@ -1,6 +1,13 @@
-import { Component } from '@angular/core';
-import { StatusBar, Style } from '@capacitor/status-bar';
+import { Component, ViewChild } from '@angular/core';
+import { AlertController, IonRouterOutlet, Platform } from '@ionic/angular';
+import { App } from '@capacitor/app';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusbarService } from './services/statusbar.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
+const Language = 'lang';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,5 +23,72 @@ export class AppComponent {
     { title: 'Contactus', url: '/contactus', icon: 'call' },
   ];
 
-  constructor() {}
+  confirmationAlert: any;
+
+  constructor(
+    private platform: Platform,
+    private location: Location,
+    private alertController: AlertController,
+    private route: Router,
+    private statusBarServ: StatusbarService,
+    public translate: TranslateService
+  ) {
+    var lang = localStorage.getItem(Language);
+    if (lang != undefined) {
+      translate.use(lang);
+    }
+
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      console.log(`Language Changed to ${event.lang}`);
+      localStorage.setItem(Language, event.lang);
+    });
+
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      SplashScreen.hide();
+      this.statusBarServ.setLightStatusBar();
+      this.backbuttonSubscribeMethod();
+    });
+  }
+
+
+  backbuttonSubscribeMethod() {
+    App.addListener('backButton', () => {
+      if (this.location.isCurrentPathEqualTo('/home')) {
+        //console.log('Route Url : ' + this.route.url + ' , CanGoBack: ' + handler.canGoBack);
+        this.showExitConfirm();
+      } else {
+        this.location.back();
+      }
+    });
+  }
+
+  async showExitConfirm() {
+    if (this.confirmationAlert != undefined || this.confirmationAlert != null) {
+      this.confirmationAlert.dismiss();
+    }
+    this.confirmationAlert = await this.alertController.create({
+      header: 'App termination',
+      message: 'Do you want to close the app?',
+      backdropDismiss: false,
+      buttons: [{
+        text: 'Stay',
+        role: 'cancel',
+        handler: () => {
+          console.log('Application exit prevented!');
+          this.route.navigateByUrl('./home');
+        }
+      }, {
+        text: 'Exit',
+        handler: () => {
+          App.exitApp();
+        }
+      }]
+    });
+
+    await this.confirmationAlert.present();
+  }
 }

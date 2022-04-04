@@ -53,6 +53,11 @@
     }
 }
 
+.titleText {
+    font-weight: 600;
+    user-select: none;
+}
+
 .tracking-in-contract {
     -webkit-animation: tracking-in-contract 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) both;
     animation: tracking-in-contract 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) both;

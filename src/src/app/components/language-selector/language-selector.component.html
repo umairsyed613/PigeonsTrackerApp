@@ -1,0 +1,11 @@
+<ion-content fullscreen="true">
+    <ion-item>
+        <ion-title>Choose Language</ion-title>
+    </ion-item>
+    <ion-list>
+        <ion-item *ngFor="let lang of languageList" (click)="activateLanguage(lang.code)">
+            <img [src]="lang.iconpath" width="20px" />
+            <ion-label>{{lang.label}}</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

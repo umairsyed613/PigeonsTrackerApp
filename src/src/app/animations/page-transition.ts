@@ -32,21 +32,13 @@ export const customPageTransition = (_: HTMLElement, opts: any): Animation => {
   exitTransition.fromTo('opacity', '1', '0');
 
   if (opts.direction === 'forward') {
-    //transform: rotateY(20deg) rotateX(35deg) translate(300px, -300px) skew(-35deg, 10deg);
-    //transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
-    enterTransition.fromTo('transform', 'rotateY(20deg)', 'rotateY(0)');
-    enterTransition.fromTo('transform', 'rotateX(35deg)', 'rotateX(0deg)');
-    enterTransition.fromTo('transform', 'translate(300px, -300px)', 'translate(0, 0)');
-    enterTransition.fromTo('transform', 'skew(-35deg, 10deg)', 'skew(0deg, 0deg)');
-    //enterTransition.fromTo('transform', 'translateX(-10%)', 'translateX(0%)');
+    enterTransition.fromTo('transform', 'scale(0)', 'scale(1)');
 
     exitTransition.fromTo('transform', 'scale(1)', 'scale(0)');
-    //exitTransition.fromTo('transform', 'translateX(0%)', 'translateX(1.5%)');
   } else {
     enterTransition.fromTo('transform', 'translateX(10%)', 'translateX(0%)');
 
     exitTransition.fromTo('transform', 'scale(1)', 'scale(0)');
-    //exitTransition.fromTo('transform', 'translateX(0%)', 'translateX(-1.5%)');
   }
 
   rootTransition.addAnimation([enterTransition, exitTransition]);

@@ -3,9 +3,9 @@
         <ion-buttons slot="start">
             <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
-        <ion-title class="tracking-in-contract">PigeonsTracker</ion-title>
+        <ion-title class="tracking-in-contract titleText">PigeonsTracker</ion-title>
         <ion-buttons slot="end">
-            <ion-button color="primary">
+            <ion-button color="primary" (click)="showLanguageSelector()">
                 <ion-icon name="language-outline" slot="icon-only"></ion-icon>
             </ion-button>
             <ion-button color="primary">
@@ -41,24 +41,26 @@
         <ion-grid class="ion-no-margin">
             <ion-row>
                 <ion-col class="tile-1 ion-activatable" [routerLink]="['/tournaments-page']" routerDirection="forward" size="12" size-xs>
-                    <h6>Tournaments</h6>
+                    <h6>{{ 'Tournaments' | translate }}</h6>
                     <ion-icon name="trophy-outline"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </ion-col>
                 <ion-col class="tile-2 ion-activatable" [routerLink]="['/practice-page']" routerDirection="forward" size="12" size-xs>
-                    <h6>Practice</h6>
+                    <h6>
+                        {{ 'Practice' | translate }}
+                    </h6>
                     <ion-icon name="walk-outline"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="tile-3 ion-activatable" [routerLink]="['/diseases-cure-page']" routerDirection="forward" size="12" size-xs>
-                    <h6>Diseases & Cure</h6>
+                    <h6>{{'PigeonsDiseasesAndCure' | translate}}</h6>
                     <ion-icon name="bandage-outline"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </ion-col>
                 <ion-col class="tile-4 ion-activatable" [routerLink]="['/information']" routerDirection="forward" size="12" size-xs>
-                    <h6>Information</h6>
+                    <h6>{{'Information' | translate}}</h6>
                     <ion-icon name="information-outline"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </ion-col>

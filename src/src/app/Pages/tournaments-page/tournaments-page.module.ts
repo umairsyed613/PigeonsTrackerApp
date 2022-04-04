@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TournamentsPagePageRoutingModule } from './tournaments-page-routing.module';
 
 import { TournamentsPagePage } from './tournaments-page.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TournamentsPagePageRoutingModule
+    TournamentsPagePageRoutingModule,
+    ComponentsModule
   ],
   declarations: [TournamentsPagePage]
 })

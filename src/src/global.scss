@@ -35,6 +35,13 @@
     src: url('./assets/fonts/Poppins-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    src: url('./assets/fonts/Roboto-Regular.ttf');
+}
+
 ion-app {
     --ripple-color: var(--ion-color-primary);
 }
