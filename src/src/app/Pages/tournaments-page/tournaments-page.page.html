@@ -7,7 +7,7 @@
         <ion-title>Tournaments</ion-title>
         <ion-buttons slot="end">
             <ion-button color="primary">
-                <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+                <ion-icon name="filter-circle-outline" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -21,20 +21,22 @@
     </ion-fab>
 
     <div class="container">
-        <ion-item>
-            <ion-icon name="trophy-outline" slot="start"></ion-icon>
-            <ion-text>
-                <h6>From you</h6>
-            </ion-text>
-        </ion-item>
-        <div class="tournaments-list"></div>
-        <ion-item>
-            <ion-icon name="trophy-outline" slot="start"></ion-icon>
-            <ion-text>
-                <h6>From others</h6>
-            </ion-text>
-        </ion-item>
-        <div class="tournaments-list">
-        </div>
+        <ion-grid class="ion-no-margin ion-no-padding">
+            <ion-row class="ion-no-padding">
+                <ion-col *ngFor="let item of data" sizeLg="2" sizeMd="3" sizeXs="6" class="ion-text-center">
+                    <div class="item-data ion-activatable" Ripple-Vibrate>
+                        <img class="item-img " [src]="item.Img " />
+                        <ion-label class="ion-text-start text-truncate">{{item.Name}}</ion-label>
+                        <ion-label class="text-truncate">{{item.City}}</ion-label>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </div>
+
+    <ion-infinite-scroll threshold="100px " (ionInfinite)="loadData($event) ">
+        <ion-infinite-scroll-content loadingSpinner="bubbles " loadingText="Loading more data... ">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

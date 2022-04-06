@@ -42,6 +42,24 @@
     src: url('./assets/fonts/Roboto-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-style: normal;
+    font-weight: normal;
+    src: url('./assets/fonts/NotoNastaliqUrdu-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-style: bold;
+    font-weight: 800;
+    src: url('./assets/fonts/NotoNastaliqUrdu-Bold.ttf');
+}
+
 ion-app {
     --ripple-color: var(--ion-color-primary);
+}
+
+ion-toolbar {
+    --background: transparent;
 }

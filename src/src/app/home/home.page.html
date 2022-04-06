@@ -8,7 +8,7 @@
             <ion-button color="primary" (click)="showLanguageSelector()">
                 <ion-icon name="language-outline" slot="icon-only"></ion-icon>
             </ion-button>
-            <ion-button color="primary">
+            <ion-button color="primary" (click)="goToSettings()">
                 <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -33,37 +33,34 @@
         </ion-fab-list>
     </ion-fab>
 
-    <div class="quick-links ion-margin-start">
-        <ion-icon name="link-outline"></ion-icon>
-        <h5 class="ion-margin-start">Quick Links</h5>
-    </div>
     <div class="category-slider ion-margin-top">
         <ion-grid class="ion-no-margin">
             <ion-row>
-                <ion-col class="tile-1 ion-activatable" [routerLink]="['/tournaments-page']" routerDirection="forward" size="12" size-xs>
-                    <h6>{{ 'Tournaments' | translate }}</h6>
-                    <ion-icon name="trophy-outline"></ion-icon>
-                    <ion-ripple-effect></ion-ripple-effect>
-                </ion-col>
-                <ion-col class="tile-2 ion-activatable" [routerLink]="['/practice-page']" routerDirection="forward" size="12" size-xs>
+                <ion-col class="tile-1 ion-activatable" [routerLink]="['/practice-page']" routerDirection="forward" size="12" Ripple-Vibrate size-xs>
                     <h6>
                         {{ 'Practice' | translate }}
                     </h6>
-                    <ion-icon name="walk-outline"></ion-icon>
+                    <ion-icon name="walk"></ion-icon>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </ion-col>
+                <ion-col class="tile-2 ion-activatable" [routerLink]="['/my-tournaments']" routerDirection="forward" size="12" Ripple-Vibrate size-xs>
+                    <h6>{{'MyTournaments' | translate}}</h6>
+                    <ion-icon name="star"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col class="tile-3 ion-activatable" [routerLink]="['/diseases-cure-page']" routerDirection="forward" size="12" size-xs>
+                <ion-col class="tile-3 ion-activatable" [routerLink]="['/diseases-cure-page']" routerDirection="forward" size="12" Ripple-Vibrate size-xs>
                     <h6>{{'PigeonsDiseasesAndCure' | translate}}</h6>
-                    <ion-icon name="bandage-outline"></ion-icon>
+                    <ion-icon name="bandage"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </ion-col>
-                <ion-col class="tile-4 ion-activatable" [routerLink]="['/information']" routerDirection="forward" size="12" size-xs>
-                    <h6>{{'Information' | translate}}</h6>
-                    <ion-icon name="information-outline"></ion-icon>
+                <ion-col class="tile-4 ion-activatable" [routerLink]="['/tournaments-page']" routerDirection="forward" size="12" Ripple-Vibrate size-xs>
+                    <h6>{{ 'Tournaments' | translate }}</h6>
+                    <ion-icon name="trophy"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </ion-col>
+
             </ion-row>
         </ion-grid>
     </div>

@@ -35,7 +35,12 @@ const routes: Routes = [
     path: 'contactus',
     loadChildren: () => import('./Pages/contactus/contactus.module').then( m => m.ContactusPageModule)
   },
-  { path: '**', redirectTo: '/home' }
+  {
+    path: 'settings',
+    loadChildren: () => import('./Pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+
+  { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({

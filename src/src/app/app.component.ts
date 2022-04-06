@@ -1,11 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
-import { AlertController, IonRouterOutlet, Platform } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { AlertController, Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusbarService } from './services/statusbar.service';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { MyAppState } from './app.global';
+import { ThemeService } from './services/theme.service';
 
 const Language = 'lang';
 @Component({
@@ -31,15 +33,19 @@ export class AppComponent {
     private alertController: AlertController,
     private route: Router,
     private statusBarServ: StatusbarService,
-    public translate: TranslateService
-  ) {
+    public translate: TranslateService,
+    public global: MyAppState,
+    private themeServ: ThemeService
+    ) {
+      this.themeServ.checkAndSetTheme();
     var lang = localStorage.getItem(Language);
     if (lang != undefined) {
       translate.use(lang);
     }
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      console.log(`Language Changed to ${event.lang}`);
+      // this.toastCtrl.create({message: `Current Language: ${event.lang}`, duration: 1000, animated: true, color: 'primary'}).then(t => t.present());
+      //console.log(event);
       localStorage.setItem(Language, event.lang);
     });
 

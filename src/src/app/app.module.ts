@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { customPageTransition } from './animations/page-transition';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { CreateTranslateLoader } from './functions/TranslateLoader';
+import { MyAppState } from './app.global';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,7 @@ import { CreateTranslateLoader } from './functions/TranslateLoader';
       },
       defaultLanguage: 'en'
     })],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [MyAppState, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {

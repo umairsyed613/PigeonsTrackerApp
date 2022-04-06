@@ -3,9 +3,10 @@
         <ion-title>Choose Language</ion-title>
     </ion-item>
     <ion-list>
-        <ion-item *ngFor="let lang of languageList" (click)="activateLanguage(lang.code)">
+        <ion-item *ngFor="let lang of languageList" (click)="activateLanguage(lang.code)" class="ion-activatable">
             <img [src]="lang.iconpath" width="20px" />
             <ion-label>{{lang.label}}</ion-label>
+            <ion-ripple-effect></ion-ripple-effect>
         </ion-item>
     </ion-list>
 </ion-content>

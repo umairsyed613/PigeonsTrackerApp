@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
+import { DirectiveModule } from '../directives/directive.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModuleModule } from '../shared-module/shared-module.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SharedModuleModule
+    SharedModuleModule,
+    DirectiveModule
   ],
   declarations: [HomePage]
 })

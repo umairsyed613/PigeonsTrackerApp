@@ -1,6 +1,6 @@
 <ion-app>
     <ion-split-pane contentId="main-content" when="xl">
-        <ion-menu contentId="main-content" type="overlay" swipeGesture="false">
+        <ion-menu contentId="main-content" type="overlay" swipeGesture="true">
             <ion-content>
                 <div class="menu-logo">
                     <img src="../assets/icon/pigeonstracker_icon.png">
@@ -14,7 +14,13 @@
                         </ion-item>
                     </ion-menu-toggle>
                 </ion-list>
+
             </ion-content>
+            <ion-footer class="ion-no-border" [translucent]="true" *ngIf="global.state['version']">
+                <ion-item lines="none">
+                    <ion-label style="font-style: italic;">ver: {{global.state['version']}}</ion-label>
+                </ion-item>
+            </ion-footer>
         </ion-menu>
         <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
