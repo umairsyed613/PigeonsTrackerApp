@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "32162898136",
+    "project_id": "pigeonstracker",
+    "storage_bucket": "pigeonstracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32162898136:android:5b0f31b256eab70c81f7ad",
+        "android_client_info": {
+          "package_name": "com.pigeonstracker.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32162898136-7q54rneqfvfdo0dn83905i05s6if72th.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pigeonstracker.app",
+            "certificate_hash": "5121b2585607f97f50283c5cebbaf1ba1983568e"
+          }
+        },
+        {
+          "client_id": "32162898136-2dnfe9k3b397kkmglhv3bftes9sik46n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDboPIQReR3PnlAxPzq93RK5xlVoHpZTCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32162898136-2dnfe9k3b397kkmglhv3bftes9sik46n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
