@@ -1,5 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
+
+// const adminOnly = () => hasCustomClaim('admin');
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['home']);
+// const belongsToAccount = (next) => hasCustomClaim(`account-${next.params.id}`);
 
 const routes: Routes = [
   {
@@ -17,15 +23,18 @@ const routes: Routes = [
   },
   {
     path: 'tournaments-page',
-    loadChildren: () => import('./Pages/tournaments-page/tournaments-page.module').then( m => m.TournamentsPagePageModule)
+    loadChildren: () => import('./Pages/tournaments-page/tournaments-page.module').then( m => m.TournamentsPagePageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'practice-page',
-    loadChildren: () => import('./Pages/practice-page/practice-page.module').then( m => m.PracticePagePageModule)
+    loadChildren: () => import('./Pages/practice-page/practice-page.module').then( m => m.PracticePagePageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'diseases-cure-page',
-    loadChildren: () => import('./Pages/diseases-cure-page/diseases-cure-page.module').then( m => m.DiseasesCurePagePageModule)
+    loadChildren: () => import('./Pages/diseases-cure-page/diseases-cure-page.module').then( m => m.DiseasesCurePagePageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'information',
@@ -37,9 +46,18 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    loadChildren: () => import('./Pages/settings/settings.module').then( m => m.SettingsPageModule)
+    loadChildren: () => import('./Pages/settings/settings.module').then( m => m.SettingsPageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
-
+  {
+    path: 'login',
+    loadChildren: () => import('./Pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./Pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
   { path: '**', redirectTo: '/home' },
 ];
 

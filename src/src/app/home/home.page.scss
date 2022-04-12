@@ -27,9 +27,7 @@
         max-width: 600px;
     }
     ion-col {
-        //background-color: var(--ion-color-primary);
         background: var(--pt-home-tile);
-        //background: linear-gradient(180deg, rgba(79, 1, 152, 1) 0%, rgba(56, 0, 109, 1) 100%);
         color: var(--ion-color-light);
         margin: 5px;
         padding: 1rem;
@@ -38,7 +36,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 10px;
-        box-shadow: rgb(98 0 255 / 50%) 0px 10px 10px -10px;
+        box-shadow: var(--pt-home-tile-shadow);
         -webkit-animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         outline: none;
@@ -47,7 +45,7 @@
         h6 {
             margin-top: 2rem;
             font-weight: 400;
-            font-size: 1rem;
+            font-size: 1.3rem;
             //letter-spacing: 0.075rem;
             user-select: none;
         }

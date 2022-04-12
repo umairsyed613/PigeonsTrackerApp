@@ -1,0 +1,26 @@
+<ion-header class="ion-no-border" [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="primary"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Profile</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-start ion-padding-end">
+
+    <div class="container" *ngIf="user$ | async as user">
+        <ion-avatar class="ion-margin-top ion-margin-bottom">
+            <img [src]="fbImageUrl ? fbImageUrl : user.photoURL">
+        </ion-avatar>
+        <h1 class="ion-margin-bottom">Hello {{ user.displayName }}!</h1>
+        <span class="ion-margin-bottom" *ngIf="user.email">{{ user.email }}</span>
+        <span class="ion-margin-bottom" *ngIf="user.providerData[0].email">{{ user.providerData[0].email }}</span>
+        <span class="ion-margin-bottom" *ngIf="user.providerData[0].providerId">Provider: {{ user.providerData[0].providerId }}</span>
+
+        <ion-button (click)="logout()" fill="outline">
+            Logout
+        </ion-button>
+    </div>
+
+</ion-content>

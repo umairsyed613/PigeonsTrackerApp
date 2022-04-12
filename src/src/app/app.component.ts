@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, isPlatform, Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -8,6 +8,9 @@ import { StatusbarService } from './services/statusbar.service';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { MyAppState } from './app.global';
 import { ThemeService } from './services/theme.service';
+//import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { StorageService } from './services/storage.service';
+//import {FacebookLogin} from "@capacitor-community/facebook-login";
 
 const Language = 'lang';
 @Component({
@@ -22,6 +25,7 @@ export class AppComponent {
     { title: 'Practice', url: '/practice-page', icon: 'walk' },
     { title: 'Diseases & Cure', url: '/diseases-cure-page', icon: 'bandage' },
     { title: 'Information', url: '/information', icon: 'information' },
+    { title: 'Preferences', url: '/settings', icon: 'settings' },
     { title: 'Contactus', url: '/contactus', icon: 'call' },
   ];
 
@@ -35,9 +39,10 @@ export class AppComponent {
     private statusBarServ: StatusbarService,
     public translate: TranslateService,
     public global: MyAppState,
-    private themeServ: ThemeService
-    ) {
-      this.themeServ.checkAndSetTheme();
+    private themeServ: ThemeService,
+    private storageServ: StorageService
+  ) {
+    this.themeServ.checkAndSetTheme();
     var lang = localStorage.getItem(Language);
     if (lang != undefined) {
       translate.use(lang);
@@ -57,6 +62,18 @@ export class AppComponent {
       SplashScreen.hide();
       this.statusBarServ.setLightStatusBar();
       this.backbuttonSubscribeMethod();
+      this.storageServ.init();
+
+      // if (!isPlatform('capacitor')) {
+      //   console.log(`Initializing Google auth for web`);
+        // GoogleAuth.initialize({
+        //   clientId: '32162898136-napo9p7ncp2amip6t7p94egghtpno54u.apps.googleusercontent.com',
+        //   scopes: ['profile', 'email'],
+        //   grantOfflineAccess: true,
+        // });
+        // console.log(`Initializing Facebook auth for web`);
+        // FacebookLogin.initialize({appId: '558271395544477'});
+      //}
     });
   }
 

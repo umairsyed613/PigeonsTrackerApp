@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border" [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" color="primary"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-start ion-padding-end">
+    <div class="container">
+        <div class="top-icon">
+            <img src="../../../assets/images/80032-fingerprint.gif">
+        </div>
+        <div class="form-container">
+            <!-- <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input placeholder="someone@email.com"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password"></ion-input>
+                <ion-icon name="eye" slot="end"></ion-icon>
+            </ion-item> -->
+
+            <!-- <ion-button expand="block" class="main-button ion-margin-top" (click)="login()">
+                <ion-icon name="log-in-outline" slot="start"></ion-icon>
+                Log in</ion-button> -->
+            <h4 class="ion-text-center ion-margin-bottom">Signin with..</h4>
+            <ion-button (click)="loginGoogle()" expand="block" class="ion-margin-top">
+                <ion-icon name="logo-google" slot="start"></ion-icon>
+                Google
+            </ion-button>
+            <ion-button expand="block" (click)="loginFacebook()" class="ion-margin-top">
+                <ion-icon name="logo-facebook" slot="start"></ion-icon>
+                Facebook
+            </ion-button>
+            <!--
+            <div class="sign-up">
+                Don't have an account?
+            </div>
+
+            <div class="sign-up">
+                <ion-button color="dark" fill="outline" routerLink="/signup" routerDirection="forward">Sign up</ion-button>
+            </div> -->
+
+        </div>
+    </div>
+
+</ion-content>

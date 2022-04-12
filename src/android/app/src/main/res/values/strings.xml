@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">PigeonsTracker</string>
-    <string name="title_activity_main">PigeonsTracker</string>
-    <string name="package_name">com.pigeonstracker.app</string>
-    <string name="custom_url_scheme">com.pigeonstracker.app</string>
-    <string name="admob_app_id">ca-app-pub-7960027902389813~7067278099</string>
-
+  <string name="app_name">PigeonsTracker</string>
+  <string name="title_activity_main">PigeonsTracker</string>
+  <string name="package_name">com.pigeonstracker.app</string>
+  <string name="custom_url_scheme">com.pigeonstracker.app</string>
+  <string name="admob_app_id">ca-app-pub-7960027902389813~7067278099</string>
+  <string name="server_client_id">32162898136-2dnfe9k3b397kkmglhv3bftes9sik46n.apps.googleusercontent.com</string>
+  <string name="facebook_app_id">558271395544477</string>
 </resources>

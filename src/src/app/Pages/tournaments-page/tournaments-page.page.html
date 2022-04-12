@@ -21,22 +21,40 @@
     </ion-fab>
 
     <div class="container">
-        <ion-grid class="ion-no-margin ion-no-padding">
+        <!-- <ion-grid class="ion-no-margin ion-no-padding">
             <ion-row class="ion-no-padding">
                 <ion-col *ngFor="let item of data" sizeLg="2" sizeMd="3" sizeXs="6" class="ion-text-center">
-                    <div class="item-data ion-activatable" Ripple-Vibrate>
+                    <div class="item-data" Ripple-Vibrate>
                         <img class="item-img " [src]="item.Img " />
                         <ion-label class="ion-text-start text-truncate">{{item.Name}}</ion-label>
                         <ion-label class="text-truncate">{{item.City}}</ion-label>
-                        <ion-ripple-effect></ion-ripple-effect>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid> -->
+        <ion-grid class="ion-no-margin ion-no-padding" *ngIf="tournaments | async; else spinner">
+            <ion-row class="ion-no-padding">
+                <ion-col *ngFor="let item of tournaments | async" sizeLg="2" sizeMd="3" sizeXs="6" class="ion-text-center">
+                    <div class="item-data" Ripple-Vibrate>
+                        <img class="item-img" [src]="item.PosterImage ? item.PosterImage : 'https://via.placeholder.com/180x220.png'" />
+                        <ion-label class="ion-text-start text-truncate">{{item.Name}}</ion-label>
+                        <ion-label class="text-truncate">{{item.City.Name}}</ion-label>
                     </div>
                 </ion-col>
             </ion-row>
         </ion-grid>
+
+        <ng-template #spinner>
+            <ion-spinner name="lines"></ion-spinner>
+        </ng-template>
     </div>
 
-    <ion-infinite-scroll threshold="100px " (ionInfinite)="loadData($event) ">
+    <ion-infinite-scroll threshold="100px " (ionInfinite)="loadMoreData($event)" *ngIf="!showLoadMoreBtn">
         <ion-infinite-scroll-content loadingSpinner="bubbles " loadingText="Loading more data... ">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+
+    <ion-button (click)="loadData()" expand="block" fill="outline" *ngIf="showLoadMoreBtn">
+        Load more
+    </ion-button>
 </ion-content>

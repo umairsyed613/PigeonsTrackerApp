@@ -5,7 +5,7 @@
     ion-grid {
         ion-row {
             display: flex;
-            justify-content: start;
+            justify-content: flex-start;
             ion-col {
                 display: flex;
                 flex-direction: row;
@@ -28,6 +28,7 @@
                         margin-top: 0.8rem;
                         margin-bottom: 0.8rem;
                         width: 155px;
+                        user-select: none;
                     }
                 }
             }

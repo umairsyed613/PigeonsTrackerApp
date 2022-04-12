@@ -5,6 +5,7 @@ export class TrackingRecord {
   Id: string = Guid.create().toString();
   BirdName: string;
   NoLanded: boolean;
+  Crossed: boolean;
   EndTime?: Date;
   TotalFlyingTime?: TimeSpan;
 }

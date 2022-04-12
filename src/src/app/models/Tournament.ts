@@ -1,11 +1,11 @@
-import { Guid } from "guid-typescript";
 import { City } from "./Cities";
 import { RoofTrackingRecords } from "./RoofTrackingRecords";
 
 export class Tournament {
-  Id: string = Guid.create().toString();
+  DocId?: string;
+  UserId: string;
   Name: string;
-  UniqueCode: number;
+  UniqueCode: number = Math.floor(100000 + Math.random() * 900000);
   City: City;
   IsPublic: boolean;
   NumberOfBirds: number;
@@ -13,6 +13,7 @@ export class Tournament {
   TrackingRecords: RoofTrackingRecords[];
   StartDate: Date;
   EndDate: Date;
+  PosterImage: string;
   CreatedAt: Date;
   UpdatedAt: Date;
 }

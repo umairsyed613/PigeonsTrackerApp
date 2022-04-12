@@ -8,8 +8,8 @@
             <ion-button color="primary" (click)="showLanguageSelector()">
                 <ion-icon name="language-outline" slot="icon-only"></ion-icon>
             </ion-button>
-            <ion-button color="primary" (click)="goToSettings()">
-                <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
+            <ion-button color="primary" (click)="goToProfile()">
+                <ion-icon name="person-circle-outline" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -18,7 +18,7 @@
 <ion-content>
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
         <ion-fab-button color="primary">
-            <ion-icon name="share-social-outline"></ion-icon>
+            <ion-icon name="thumbs-up-outline"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="top">
             <ion-fab-button color="secondary">
@@ -69,4 +69,46 @@
         <ion-icon name="globe-outline"></ion-icon>
         <h5 class="ion-margin-start">Descover</h5>
     </div>
+
+    <ion-button (click)="testTournament()" expand="full" color="primary">
+        Make Test Tournament
+    </ion-button>
+
+    <ion-button (click)="getTournaments()" expand="full" color="secondary">
+        Get Tournaments
+    </ion-button>
+    <!-- <ion-button (click)="deleteTournamentsCollection()" expand="full" color="danger">
+        Delete Collection
+    </ion-button>
+
+    <ion-button (click)="registerUser()" expand="full" color="warning">
+        Make Test User
+    </ion-button>
+    <ion-button (click)="getUser()" expand="full" color="secondary">
+        Get Specific User
+    </ion-button>
+    <ion-button (click)="getAllUser()" expand="full" color="success">
+        Get All Users
+    </ion-button>
+
+
+    <ion-list *ngIf="cachedTournmanets">
+        <ion-item *ngFor="let item of cachedTournmanets | keyvalue">
+            <ion-label>{{item.value.Name}}</ion-label>
+            <ion-icon slot="end" name="trash" (click)="deleteTournaments(item.key)"></ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="allUsers$">
+        <ion-item *ngFor="let item of allUsers$ | async">
+            <ion-avatar slot="start">
+                <img *ngIf="item.ProfileImage;else dummy" [src]="item.ProfileImage">
+                <ng-template #dummy><img src="../../assets/images/avatar.svg"></ng-template>
+            </ion-avatar>
+            <ion-label>{{item.FullName}}</ion-label>
+            <ion-label>{{item.Email}}</ion-label>
+            <ion-icon slot="end" name="person"></ion-icon>
+        </ion-item>
+    </ion-list> -->
+
 </ion-content>
