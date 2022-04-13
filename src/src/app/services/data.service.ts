@@ -1,16 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Tournament } from '../models/Tournament';
-import { User } from '../models/user';
+import { Tournament, TournamentItem } from '../models/Tournament';
 
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 const Tournament_Collection = 'Tournaments';
-const User_Collection = 'Users';
 
 
 @Injectable({
@@ -21,86 +17,118 @@ export class DataService {
   tournmanetsCollection: AngularFirestoreCollection<Tournament>;
   cachedTournmanets: Observable<Tournament[]>;
 
-  //constructor(public httpCLient: HttpClient) { }
+  lastInResponse: any;
+
+  private itemsSubject: BehaviorSubject<TournamentItem[] | undefined> = new BehaviorSubject(undefined);
+
+  private lastPageReached: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+
   constructor(private fireBaseSrv: AngularFirestore) {
     this.tournmanetsCollection = fireBaseSrv.collection<Tournament>(Tournament_Collection);
     //this.cachedTournmanets= this.tournmanetsCollection.valueChanges();
   }
 
-  createTournament(tournament: Tournament){
-   this.tournmanetsCollection.add({ ...tournament }).then(t => console.log(t));
+  createTournament(tournament: Tournament) {
+    this.tournmanetsCollection.add({ ...tournament }).then(t => console.log(t));
   }
 
-  getTournaments(){
-    // return this.tournmanetsCollection.snapshotChanges().pipe(
-    //   map(actions => actions.map(a => {
-    //     const data = a.payload.doc.data() as Tournament;
-    //     data.DocId = a.payload.doc.id;
-    //     return { ...data };
-    //   }))
-    // );
+  watchItems(): Observable<TournamentItem[]> {
+    return this.itemsSubject.asObservable();
+  }
 
-    return this.fireBaseSrv.collection(Tournament_Collection, ref => ref.orderBy('CreatedAt', 'desc').limit(10)).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Tournament;
-        data.DocId = a.payload.doc.id;
-        return { ...data };
-      }))
+  watchLastPageReached(): Observable<boolean> {
+    return this.lastPageReached.asObservable();
+  }
+
+  async initLoadTournaments() {
+    console.log('Initiating Tournaments...');
+    const size = 5;
+    return new Promise<void>((resolve, reject) => {
+      try {
+        this.fireBaseSrv.collection(Tournament_Collection, ref => ref.orderBy('CreatedAt', 'desc').limit(size)).snapshotChanges().pipe(
+          tap(data => this.lastInResponse = data.length >= size ? data[data.length - 1].payload.doc : undefined),
+          map(actions => actions.map(a => {
+            const data = a.payload.doc.data() as Tournament;
+            const id = a.payload.doc.id;
+            const ref = a.payload.doc.ref;
+            const fromCache = a.payload.doc.metadata.fromCache;
+            return { id, ref, data, fromCache };
+          }))
+        ).subscribe(async (items: TournamentItem[]) => {
+          await this.addItems(items);
+
+          resolve();
+        })
+      } catch (e) {
+        reject(e);
+      };
+    });
+  }
+
+
+  private addItems(items: TournamentItem[]): Promise<void> {
+    //console.log(items);
+    return new Promise<void>((resolve) => {
+      if (!items || items.length <= 0) {
+        this.lastPageReached.next(true);
+        this.lastInResponse = undefined;
+
+        resolve();
+        return;
+      }
+      this.itemsSubject.asObservable().pipe(take(1))
+        .subscribe((currentItems: TournamentItem[]) => {
+          //items = items.filter(f => f.fromCache === false);[...currentItems, ...items]
+          this.itemsSubject.next(currentItems !== undefined ? currentItems.concat(items.filter(x => currentItems.every(y => y.id !== x.id))) : [...items]);
+
+          resolve();
+        });
+    });
+  }
+
+  loadNextPageTournamanet() {
+    if (this.lastInResponse) {
+      const size = 5;
+      return new Promise<void>((resolve, reject) => {
+        try {
+          this.fireBaseSrv.collection(Tournament_Collection, ref => ref.orderBy('CreatedAt', 'desc').limit(size).startAfter(this.lastInResponse)).snapshotChanges().pipe(
+            tap(data => {
+              this.lastInResponse = data.length >= size ? data[data.length - 1].payload.doc : undefined;
+
+              if (!this.lastInResponse) {
+                this.lastPageReached.next(true);
+              }
+            }),
+            map(actions => actions.map(a => {
+              const data = a.payload.doc.data() as Tournament;
+              const id = a.payload.doc.id;
+              const ref = a.payload.doc.ref;
+              const fromCache = a.payload.doc.metadata.fromCache;
+              return { id, ref, data, fromCache };
+            }))
+          ).subscribe(async (items: TournamentItem[]) => {
+            await this.addItems(items);
+
+            resolve();
+          })
+        } catch (e) {
+          reject(e);
+        };
+      });
+    }
+  }
+
+  getDocumentbyId(docId){
+    return this.fireBaseSrv.collection(Tournament_Collection).doc(docId).snapshotChanges().pipe(
+      map(a => {
+        const data = a.payload.data() as Tournament;
+        const id = a.payload.id;
+        const ref = a.payload.ref;
+        const fromCache = a.payload.metadata.fromCache;
+        return <TournamentItem>{ id, ref, data, fromCache };
+      })
     );
   }
 
-  getPagedTournaments(size){
-    const query = ref => ref.orderBy('CreatedAt', 'desc').limit(size);
-    return this.fireBaseSrv.collection(Tournament_Collection, query).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Tournament;
-        data.DocId = a.payload.doc.id;
-        return { ...data };
-      }))
-    );
-  }
-  // createTournament(tournament: Tournament) {
-  //   this.httpCLient.post(`${environment.api_url}/${Tournament_Collection}/`, JSON.stringify(tournament), { headers: this.headers }).subscribe(r => console.log(r));
-  // }
-
-  // getData(pageSize: number, pageState) {
-
-  //   let uri = `${environment.api_url}/${Tournament_Collection}?page-size=${pageSize}`;
-  //   if (pageState != undefined || pageState != null) {
-  //     uri += `&page-state=${pageState}`;
-  //   }
-  //   return this.httpCLient.get(uri, { headers: this.headers });
-  // }
-
-  // deleteTournamentDocument(docId) {
-  //   let uri = `${environment.api_url}/${Tournament_Collection}/${docId}`;
-  //   this.httpCLient.delete(uri, { headers: this.headers }).subscribe(res => console.log(res));
-  // }
-
-  // deleteTournamentCollection() {
-  //   let uri = `${environment.api_url}/${Tournament_Collection}`;
-  //   this.httpCLient.delete(uri, { headers: this.headers }).subscribe(res => console.log(res));
-  // }
-
-  // /// User Management /////
-
-  // createUser(user: User) {
-  //   this.httpCLient.post(`${environment.api_url}/${User_Collection}/`, JSON.stringify(user), { headers: this.headers }).subscribe(r => console.log(r));
-  // }
-
-  // getUser(email: string) {
-  //   let uri = `${environment.api_url}/${User_Collection}?raw=true&where=\{"Email":\{"$eq":"${email}"\}\}`;
-  //   return this.httpCLient.get(uri, { headers: this.headers });
-  // }
-
-  // getAllUser() {
-  //   let uri = `${environment.api_url}/${User_Collection}?raw=true`;
-  //   return this.httpCLient.get(uri, { headers: this.headers })
-  // }
-  /////End User Management /////
-
-  private handleErrorPromise(error: Response | any) {
-    console.error(error.message || error);
-    return Promise.reject(error.message || error);
-  }
 }

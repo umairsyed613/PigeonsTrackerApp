@@ -1,8 +1,8 @@
+import { DocumentReference } from "@angular/fire/compat/firestore";
 import { City } from "./Cities";
 import { RoofTrackingRecords } from "./RoofTrackingRecords";
 
 export class Tournament {
-  DocId?: string;
   UserId: string;
   Name: string;
   UniqueCode: number = Math.floor(100000 + Math.random() * 900000);
@@ -16,4 +16,16 @@ export class Tournament {
   PosterImage: string;
   CreatedAt: Date;
   UpdatedAt: Date;
+}
+
+export interface TournamentItem {
+  id: string;
+  ref: DocumentReference;
+  data: Tournament;
+  fromCache: boolean;
+}
+
+export interface FavTournament {
+  id: string;
+  name: string;
 }

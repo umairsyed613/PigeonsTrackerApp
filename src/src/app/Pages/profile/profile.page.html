@@ -15,7 +15,7 @@
         </ion-avatar>
         <h1 class="ion-margin-bottom">Hello {{ user.displayName }}!</h1>
         <span class="ion-margin-bottom" *ngIf="user.email">{{ user.email }}</span>
-        <span class="ion-margin-bottom" *ngIf="user.providerData[0].email">{{ user.providerData[0].email }}</span>
+        <span class="ion-margin-bottom" *ngIf="user.providerData[0].email && user.providerData[0].email != user.email">{{ user.providerData[0].email }}</span>
         <span class="ion-margin-bottom" *ngIf="user.providerData[0].providerId">Provider: {{ user.providerData[0].providerId }}</span>
 
         <ion-button (click)="logout()" fill="outline">

@@ -16,6 +16,7 @@ export class SettingsPage implements AfterViewInit {
     { name: 'Default', class: 'default' },
     { name: 'Green', class: 'green' },
     { name: 'Gray', class: 'gray' },
+    { name: 'Dark Gray', class: 'darkgray' },
     { name: 'Red', class: 'red' },
   ];
 

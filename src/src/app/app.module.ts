@@ -5,6 +5,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { Drivers } from '@ionic/storage';
+import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,10 +32,14 @@ import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
       },
       defaultLanguage: 'en'
     }),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: '__pigeonstracker',
+      driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
+    }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule.enablePersistence()],
-  providers: [MyAppState, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },  { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },],
+  providers: [MyAppState, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },],
   bootstrap: [AppComponent],
 })
 export class AppModule {

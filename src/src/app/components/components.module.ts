@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UpsertTournamentComponent } from './upsert-tournament/upsert-tournament.component';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
-import { SharedModuleModule } from '../shared-module/shared-module.module';
+import { SharedModule } from '../shared-module/shared-module.module';
 
 
 
@@ -15,7 +15,7 @@ import { SharedModuleModule } from '../shared-module/shared-module.module';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    SharedModuleModule
+    SharedModule
   ],
   exports: [UpsertTournamentComponent, LanguageSelectorComponent]
 })

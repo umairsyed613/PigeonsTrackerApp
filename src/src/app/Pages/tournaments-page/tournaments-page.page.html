@@ -4,7 +4,7 @@
             <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" routerDirection="back" color="primary">
             </ion-back-button>
         </ion-buttons>
-        <ion-title>Tournaments</ion-title>
+        <ion-title>{{ 'Tournaments' | translate }}</ion-title>
         <ion-buttons slot="end">
             <ion-button color="primary">
                 <ion-icon name="filter-circle-outline" slot="icon-only"></ion-icon>
@@ -21,24 +21,19 @@
     </ion-fab>
 
     <div class="container">
-        <!-- <ion-grid class="ion-no-margin ion-no-padding">
+        <ion-grid class="ion-no-margin ion-no-padding" *ngIf="items$ | async; else spinner">
             <ion-row class="ion-no-padding">
-                <ion-col *ngFor="let item of data" sizeLg="2" sizeMd="3" sizeXs="6" class="ion-text-center">
+                <ion-col *ngFor="let item of items$ | async" sizeLg="2" sizeMd="3" sizeXs="6" class="ion-text-center">
                     <div class="item-data" Ripple-Vibrate>
-                        <img class="item-img " [src]="item.Img " />
-                        <ion-label class="ion-text-start text-truncate">{{item.Name}}</ion-label>
-                        <ion-label class="text-truncate">{{item.City}}</ion-label>
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid> -->
-        <ion-grid class="ion-no-margin ion-no-padding" *ngIf="tournaments | async; else spinner">
-            <ion-row class="ion-no-padding">
-                <ion-col *ngFor="let item of tournaments | async" sizeLg="2" sizeMd="3" sizeXs="6" class="ion-text-center">
-                    <div class="item-data" Ripple-Vibrate>
-                        <img class="item-img" [src]="item.PosterImage ? item.PosterImage : 'https://via.placeholder.com/180x220.png'" />
-                        <ion-label class="ion-text-start text-truncate">{{item.Name}}</ion-label>
-                        <ion-label class="text-truncate">{{item.City.Name}}</ion-label>
+                        <img class="item-img" [src]="item.data.PosterImage ? item.data.PosterImage : 'https://via.placeholder.com/240x220.png'" />
+                        <ion-label class="ion-text-start text-truncate">{{item.data.Name}}</ion-label>
+                        <ion-label class="text-truncate">{{item.data.City.Name}}</ion-label>
+                        <ion-label class="text-truncate" style="font-size: 0.7rem;">{{item.id}}</ion-label>
+                        <div class="btnFav">
+                            <ion-fab-button [color]="isFav(item.id) ? 'primary' : 'light'" (click)="addToFavorite(item.id, item.data.Name)">
+                                <ion-icon [name]="isFav(item.id) ? 'heart': 'heart-outline'"></ion-icon>
+                            </ion-fab-button>
+                        </div>
                     </div>
                 </ion-col>
             </ion-row>
@@ -49,12 +44,15 @@
         </ng-template>
     </div>
 
-    <ion-infinite-scroll threshold="100px " (ionInfinite)="loadMoreData($event)" *ngIf="!showLoadMoreBtn">
+    <ion-infinite-scroll threshold="100px " (ionInfinite)="loadMoreData($event)" *ngIf="showLoadMoreInfinite">
         <ion-infinite-scroll-content loadingSpinner="bubbles " loadingText="Loading more data... ">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
-    <ion-button (click)="loadData()" expand="block" fill="outline" *ngIf="showLoadMoreBtn">
-        Load more
-    </ion-button>
+    <div class="loadmorebtn" *ngIf="showLoadMoreBtn">
+        <ion-button (click)="loadNextPage()" fill="outline" color="medium">
+            <ion-icon name="refresh-outline" slot="start"></ion-icon>
+            Load more
+        </ion-button>
+    </div>
 </ion-content>

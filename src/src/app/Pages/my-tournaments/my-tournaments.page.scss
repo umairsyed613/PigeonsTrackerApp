@@ -1,0 +1,34 @@
+ion-list {
+    @for $i from 1 through 20 {
+        ion-item:nth-child(#{$i}) {
+            animation-delay: $i * 0.3s;
+        }
+    }
+    ion-list-header {
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+}
+
+.fav-tourn {
+    animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.noitems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    margin-top: 3rem;
+    ion-icon {
+        font-size: 9rem;
+        --ionicon-stroke-width: 16px;
+        opacity: 0.2;
+        margin-bottom: 1rem;
+    }
+    ion-label {
+        font-size: 2rem;
+        font-weight: 600;
+        opacity: 0.4;
+    }
+}

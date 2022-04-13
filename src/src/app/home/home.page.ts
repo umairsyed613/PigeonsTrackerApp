@@ -10,7 +10,6 @@ import { DataService } from '../services/data.service';
 import { Tournament } from '../models/Tournament';
 import { Cities } from '../models/Cities';
 import { User } from '../models/user';
-import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 
@@ -77,7 +76,7 @@ export class HomePage implements AfterViewInit {
 
   getTournaments() {
     //this.dataServ.cachedTournmanets.subscribe(s => console.log(s));
-    this.dataServ.getTournaments().subscribe(s => console.log(s));
+    //this.dataServ.getTournaments().subscribe(s => console.log(s));
   }
   /*
 

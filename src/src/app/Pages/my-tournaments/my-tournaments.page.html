@@ -1,0 +1,44 @@
+<ion-header class="ion-no-border" translucent="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home" text="" icon="chevron-back-outline" routerDirection="back" color="primary">
+            </ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'MyTournaments' | translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="primary">
+                <ion-icon name="filter-circle-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-end">
+    <ion-list>
+        <ion-list-header>
+            <ion-label color="medium">Your's Tournaments</ion-label>
+        </ion-list-header>
+        <ion-item class="fav-tourn ion-activatable" Ripple-Vibrate>
+            <ion-icon name="trophy" slot="start"></ion-icon>
+            <ion-label class="text-truncate">Test</ion-label>
+            <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+
+        <ion-list-header class="ion-margin-top">
+            <ion-label color="medium">Favourites</ion-label>
+        </ion-list-header>
+        <ion-item class="fav-tourn ion-activatable" *ngFor="let fav of favTournamanetIds; let i = index" Ripple-Vibrate>
+            <ion-icon name="trophy" slot="start"></ion-icon>
+            <ion-label class="text-truncate">{{ fav.name }}</ion-label>
+            <ion-button (click)="removeFav(fav.id)" fill="clear" shape="round">
+                <ion-icon name="heart-dislike" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+    </ion-list>
+
+    <div class="noitems" *ngIf="!favTournamanetIds.length">
+        <ion-icon name="sad-outline"></ion-icon>
+        <ion-label>No items..</ion-label>
+    </div>
+</ion-content>

@@ -8,7 +8,8 @@ import { TournamentsPagePageRoutingModule } from './tournaments-page-routing.mod
 
 import { TournamentsPagePage } from './tournaments-page.page';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { DirectiveModule } from 'src/app/directives/directive.module';
+
+import { SharedModule } from 'src/app/shared-module/shared-module.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { DirectiveModule } from 'src/app/directives/directive.module';
     IonicModule,
     TournamentsPagePageRoutingModule,
     ComponentsModule,
-    DirectiveModule
+    SharedModule
   ],
   declarations: [TournamentsPagePage]
 })

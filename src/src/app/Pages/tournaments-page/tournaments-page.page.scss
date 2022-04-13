@@ -1,3 +1,7 @@
+ion-content {
+    padding-bottom: 3rem;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -12,23 +16,23 @@
                 align-items: center;
                 margin-bottom: 1rem;
                 padding: 0.2rem;
+                animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                user-select: none;
                 .item-data {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     border-radius: 0.7rem;
-                    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                    box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 4px;
                     .item-img {
                         border-top-left-radius: 0.7rem;
                         border-top-right-radius: 0.7rem;
-                        width: 240px;
-                        height: 280px;
+                        height: 220px;
                     }
                     ion-label {
                         margin-top: 0.8rem;
                         margin-bottom: 0.8rem;
                         width: 155px;
-                        user-select: none;
                     }
                 }
             }
@@ -36,8 +40,18 @@
     }
 }
 
-.text-truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.loadmorebtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btnFav {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    ion-fab-button {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
 }
