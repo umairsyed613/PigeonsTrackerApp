@@ -60,7 +60,8 @@ const routes: Routes = [
   },
   {
     path: 'my-tournaments',
-    loadChildren: () => import('./Pages/my-tournaments/my-tournaments.module').then( m => m.MyTournamentsPageModule)
+    loadChildren: () => import('./Pages/my-tournaments/my-tournaments.module').then( m => m.MyTournamentsPageModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
 
   { path: '**', redirectTo: '/home' },

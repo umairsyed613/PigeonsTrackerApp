@@ -13,22 +13,31 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding-end">
+<ion-content class="ion-padding-start ion-padding-end">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="showUpsertTournament('')">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
     <ion-list>
         <ion-list-header>
-            <ion-label color="medium">Your's Tournaments</ion-label>
+            <ion-label color="medium">{{'MyTournaments' | translate}}</ion-label>
         </ion-list-header>
-        <ion-item class="fav-tourn ion-activatable" Ripple-Vibrate>
-            <ion-icon name="trophy" slot="start"></ion-icon>
+        <ion-item class="fav-tourn ion-activatable ion-no-padding" Ripple-Vibrate>
+            <ion-icon name="trophy" class="ion-margin-end"></ion-icon>
             <ion-label class="text-truncate">Test</ion-label>
+            <ion-fab-button size="small" color="light" style="--box-shadow: none;">
+                <ion-icon name="trash-outline"></ion-icon>
+            </ion-fab-button>
             <ion-ripple-effect></ion-ripple-effect>
         </ion-item>
 
         <ion-list-header class="ion-margin-top">
-            <ion-label color="medium">Favourites</ion-label>
+            <ion-label color="medium">{{'Favourites' | translate}}</ion-label>
         </ion-list-header>
-        <ion-item class="fav-tourn ion-activatable" *ngFor="let fav of favTournamanetIds; let i = index" Ripple-Vibrate>
-            <ion-icon name="trophy" slot="start"></ion-icon>
+        <ion-item class="fav-tourn ion-activatable ion-no-padding" *ngFor="let fav of favTournamanetIds; let i = index" Ripple-Vibrate>
+            <ion-icon name="trophy-outline" class="ion-margin-end"></ion-icon>
             <ion-label class="text-truncate">{{ fav.name }}</ion-label>
             <ion-button (click)="removeFav(fav.id)" fill="clear" shape="round">
                 <ion-icon name="heart-dislike" slot="icon-only"></ion-icon>

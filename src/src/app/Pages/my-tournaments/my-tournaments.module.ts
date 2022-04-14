@@ -8,14 +8,15 @@ import { MyTournamentsPageRoutingModule } from './my-tournaments-routing.module'
 
 import { MyTournamentsPage } from './my-tournaments.page';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    IonicModule,
     SharedModule,
-    MyTournamentsPageRoutingModule
+    IonicModule,
+    MyTournamentsPageRoutingModule,
+    ComponentsModule,
   ],
   declarations: [MyTournamentsPage]
 })

@@ -23,10 +23,10 @@ export class AppComponent {
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Tournaments', url: '/tournaments-page', icon: 'trophy' },
     { title: 'Practice', url: '/practice-page', icon: 'walk' },
-    { title: 'Diseases & Cure', url: '/diseases-cure-page', icon: 'bandage' },
+    { title: 'Diseases & Cure', url: '/diseases-cure-page', icon: 'medkit' },
     { title: 'Information', url: '/information', icon: 'information' },
     { title: 'Preferences', url: '/settings', icon: 'settings' },
-    { title: 'Contactus', url: '/contactus', icon: 'call' },
+    { title: 'Contact', url: '/contactus', icon: 'call' },
   ];
 
   confirmationAlert: any;

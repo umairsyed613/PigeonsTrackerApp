@@ -10,10 +10,10 @@ export class Tournament {
   IsPublic: boolean;
   NumberOfBirds: number;
   IsFixedBirds: boolean;
-  TrackingRecords: RoofTrackingRecords[];
   StartDate: Date;
-  EndDate: Date;
+  FlyingDaysData: FlyingDaysData[];
   PosterImage: string;
+  Description: string;
   CreatedAt: Date;
   UpdatedAt: Date;
 }
@@ -28,4 +28,9 @@ export interface TournamentItem {
 export interface FavTournament {
   id: string;
   name: string;
+}
+
+export class FlyingDaysData {
+  Day: Date;
+  TrackingRecords: RoofTrackingRecords[];
 }

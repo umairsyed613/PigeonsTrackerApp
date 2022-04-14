@@ -16,7 +16,7 @@
         <ion-item>
             <ion-icon slot="start" src="../../../assets/icon/icons8-vibrate-24.svg"></ion-icon>
             <ion-label>Vibration Style</ion-label>
-            <ion-select [value]="config.Vibration" okText="Okay" cancelText="Dismiss" (ionChange)="vibrationStyleChange($event)">
+            <ion-select [value]="config.Vibration" okText="Save" cancelText="Dismiss" (ionChange)="vibrationStyleChange($event)">
                 <ion-select-option value="Light">Light</ion-select-option>
                 <ion-select-option value="Medium">Medium</ion-select-option>
                 <ion-select-option value="Heavy">Heavy</ion-select-option>
@@ -29,7 +29,7 @@
         <ion-item>
             <ion-icon slot="start" name="color-palette-outline"></ion-icon>
             <ion-label>Theme Style</ion-label>
-            <ion-select [value]="config.Theme" okText="Okay" cancelText="Dismiss" (ionChange)="themeStyleChange($event)">
+            <ion-select [value]="config.Theme" okText="Save" cancelText="Dismiss" (ionChange)="themeStyleChange($event)">
                 <ion-select-option *ngFor="let item of themeColor" [value]="item.class">{{item.name}}</ion-select-option>
             </ion-select>
         </ion-item>

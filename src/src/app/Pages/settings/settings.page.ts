@@ -20,6 +20,7 @@ export class SettingsPage implements AfterViewInit {
     { name: 'Red', class: 'red' },
   ];
 
+
   constructor(private configServ: ConfigService, private themeService: ThemeService) { }
 
   ngAfterViewInit(): void {

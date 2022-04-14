@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
-import { ModalController, ToastController } from '@ionic/angular';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
-import { UpsertTournamentComponent } from 'src/app/components/upsert-tournament/upsert-tournament.component';
+import { ToastController } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
 import { Cities, City } from 'src/app/models/Cities';
-import { FavTournament, Tournament, TournamentItem } from 'src/app/models/Tournament';
+import { FavTournament, TournamentItem } from 'src/app/models/Tournament';
 import { DataService } from 'src/app/services/data.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -37,8 +36,8 @@ export class TournamentsPagePage implements OnInit, OnDestroy {
     }
   ];
 
-  constructor(private modalController: ModalController, private dataService: DataService, private storageServ: StorageService,
-    private toastController: ToastController) { }
+  constructor(private dataService: DataService, private storageServ: StorageService,
+    private toastController: ToastController, private router: Router) { }
 
   ngOnInit() {
     this.showLoadMoreBtn = !Capacitor.isNativePlatform();
@@ -71,29 +70,6 @@ export class TournamentsPagePage implements OnInit, OnDestroy {
     });
   }
 
-  async showUpsertTournament(key) {
-    const modal = await this.modalController.create({
-      component: UpsertTournamentComponent,
-      breakpoints: [0, 0.5, 0.8, 1],
-      initialBreakpoint: 0.8,
-      showBackdrop: true,
-      backdropDismiss: false,
-      componentProps: {
-        'key': key
-      }
-    });
-    modal.onDidDismiss().then(async (e) => {
-      await this.handleModalClose(e, key);
-    });
-    return await modal.present();
-  }
-
-  async handleModalClose(e, key) {
-    console.log(e);
-    if (e.data != undefined && e.data[1] === true) {
-    }
-  }
-
   loadNextPage() {
     this.dataService.loadNextPageTournamanet();
   }
@@ -106,20 +82,38 @@ export class TournamentsPagePage implements OnInit, OnDestroy {
   async addToFavorite(id, name) {
     //console.log(id);
     let msg = '';
+    let buttons = [];
+    let duration = 800;
+    let icon = '';
+
     let index = this.favTournamanetIds.findIndex(f => f.id == id);
     if (index >= 0) {
       this.favTournamanetIds.splice(index, 1);
       msg = 'Favourite removed!';
+      icon = 'heart-dislike'
     }
     else {
       this.favTournamanetIds.push(<FavTournament>{ id: id, name: name });
+      icon = 'heart'
       msg = 'Added to favourites!';
+      duration = 1500;
+      buttons = [
+        {
+          side: 'start',
+          text: 'View',
+          handler: () => {
+            this.router.navigateByUrl('my-tournaments');
+          }
+        }
+      ]
     }
 
     this.storageServ.set(fav_tournament_key, this.favTournamanetIds);
     const toast = await this.toastController.create({
-      duration: 1000,
-      message: msg
+      icon: icon,
+      duration: duration,
+      message: msg,
+      buttons: buttons
     });
 
     await toast.present();

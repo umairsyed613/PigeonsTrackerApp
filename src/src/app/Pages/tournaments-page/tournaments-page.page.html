@@ -14,18 +14,12 @@
 </ion-header>
 
 <ion-content>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="showUpsertTournament('')">
-            <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
-
     <div class="container">
         <ion-grid class="ion-no-margin ion-no-padding" *ngIf="items$ | async; else spinner">
             <ion-row class="ion-no-padding">
                 <ion-col *ngFor="let item of items$ | async" sizeLg="2" sizeMd="3" sizeXs="6" class="ion-text-center">
                     <div class="item-data" Ripple-Vibrate>
-                        <img class="item-img" [src]="item.data.PosterImage ? item.data.PosterImage : 'https://via.placeholder.com/240x220.png'" />
+                        <img class="item-img" [src]="item.data.PosterImage ? item.data.PosterImage : 'https://via.placeholder.com/240x280?text=No+Poster'" width="240px" />
                         <ion-label class="ion-text-start text-truncate">{{item.data.Name}}</ion-label>
                         <ion-label class="text-truncate">{{item.data.City.Name}}</ion-label>
                         <ion-label class="text-truncate" style="font-size: 0.7rem;">{{item.id}}</ion-label>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { DirectiveModule } from '../directives/directive.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,6 +10,7 @@ import { DirectiveModule } from '../directives/directive.module';
   declarations: [],
   exports: [
     CommonModule,
+    FormsModule,
     TranslateModule,
     DirectiveModule
   ]
